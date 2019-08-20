@@ -27,6 +27,22 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
       post api_v1_users_url, params: { user: { email: @user.email, password: :foo } }, as: :json
     end
 
-    assert_response :unprocessable_entity
+    assert_response :unprocessable_entity # 422
+  end
+
+  test 'user should be able to update itself' do
+    skip
+  end
+
+  test 'user should not be able to update another user' do
+    skip
+  end
+
+  test 'should destroy a user' do
+    assert_difference 'User.count', -1 do
+      delete api_v1_user_url @user, as: :json
+    end
+
+    assert :no_content
   end
 end
